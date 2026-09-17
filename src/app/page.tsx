@@ -7,6 +7,8 @@ import Inclusions from "@/components/Inclusions";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import EnquirySection from "@/components/EnquirySection";
 import SeoContent from "@/components/SeoContent";
+import TravellerTrust from "@/components/TravellerTrust";
+import Testimonials from "@/components/Testimonials";
 
 export default function Home() {
   return (
@@ -20,6 +22,8 @@ export default function Home() {
       <WhyChooseUs />
       <EnquirySection />
       <SeoContent />
+      <TravellerTrust />
+      <Testimonials />
     </>
   );
 }

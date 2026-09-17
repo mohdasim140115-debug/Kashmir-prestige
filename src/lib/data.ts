@@ -110,7 +110,7 @@ export const packages: TourPackage[] = [
     highlights: ["Shikara ride on Dal Lake", "Gondola ride in Gulmarg", "Betaab Valley visit"],
     image:
       "https://images.unsplash.com/photo-1715457573748-8e8a70b2c1be?w=1200&q=80&auto=format&fit=crop",
-    price: 8499,
+    price: 9999,
   },
   {
     slug: "kashmir-holiday-package-4n-5d",
@@ -124,11 +124,11 @@ export const packages: TourPackage[] = [
     highlights: ["1 night houseboat stay", "Sonamarg glacier valley", "Local Kashmiri Wazwan"],
     image:
       "https://images.unsplash.com/photo-1621232082074-1a7750ecc557?w=1200&q=80&auto=format&fit=crop",
-    price: 9999,
+    price: 11999,
   },
   {
-    slug: "kashmir-tour-package-for-couple-4n-5d",
-    name: "Kashmir Tour Package for Couple",
+    slug: "luxury-kashmir-tour-packages-4n-5d",
+    name: "Luxury Kashmir Tour Packages",
     keyword: "Honeymoon Special",
     duration: "4N / 5D",
     nights: 4,
@@ -138,7 +138,7 @@ export const packages: TourPackage[] = [
     highlights: ["Candlelight dinner on houseboat", "Private Shikara ride", "Premium couple rooms"],
     image:
       "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?w=1200&q=80&auto=format&fit=crop",
-    price: 10999,
+    price: 29999,
   },
   {
     slug: "best-kashmir-tour-package-5n-6d",
@@ -152,7 +152,7 @@ export const packages: TourPackage[] = [
     highlights: ["Doodhpathri meadows", "Full Mughal garden tour", "1 night houseboat stay"],
     image:
       "https://images.unsplash.com/photo-1627894485200-b92fb4353967?w=1200&q=80&auto=format&fit=crop",
-    price: 11999,
+    price: 13999,
   },
   {
     slug: "kashmir-family-tour-package-6n-7d",
@@ -166,7 +166,7 @@ export const packages: TourPackage[] = [
     highlights: ["Offbeat Yusmarg meadow", "Kid-friendly itinerary", "Centrally heated premium hotels"],
     image:
       "https://images.unsplash.com/photo-1598091383021-15ddea10925d?w=1200&q=80&auto=format&fit=crop",
-    price: 13499,
+    price: 15999,
   },
   {
     slug: "complete-kashmir-trip-package-7n-8d",
@@ -180,7 +180,7 @@ export const packages: TourPackage[] = [
     highlights: ["All 7 destinations covered", "Verinag Mughal spring", "Most in-depth itinerary"],
     image:
       "https://images.unsplash.com/photo-1643449416258-5c8e7ec598b1?w=1200&q=80&auto=format&fit=crop",
-    price: 14999,
+    price: 17999,
   },
 ];
 
@@ -208,3 +208,16 @@ export const services = [
   "Couple Tour Packages",
   "Customised Kashmir Tour Packages",
 ];
+
+export type Testimonial = {
+  name: string;
+  role: string;
+  rating: number;
+  quote: string;
+  photo?: string;
+};
+
+// Add real traveller reviews here as they come in — name, role/trip,
+// rating (1-5) and the quote. The section only renders once this has
+// at least one real entry.
+export const testimonials: Testimonial[] = [];
