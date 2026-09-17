@@ -77,9 +77,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: siteUrl,
   },
-  icons: {
-    icon: "/logo.jpeg",
-  },
 };
 
 const jsonLd = {

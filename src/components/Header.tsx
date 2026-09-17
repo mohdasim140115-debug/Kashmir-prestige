@@ -10,6 +10,7 @@ const navLinks = [
   { href: "#destinations", label: "Destinations" },
   { href: "#inclusions", label: "Inclusions" },
   { href: "#why-us", label: "Why Us" },
+  { href: "#gallery", label: "Gallery" },
   { href: "#enquiry", label: "Contact" },
 ];
 

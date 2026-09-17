@@ -158,9 +158,14 @@ export default function EnquiryForm({ initialPackage }: EnquiryFormProps) {
       <button
         type="submit"
         disabled={status === "sending"}
-        className="w-full rounded-full bg-gold-400 px-6 py-3.5 text-sm font-semibold text-brand-950 shadow-lg shadow-gold-400/30 transition-transform hover:scale-[1.01] hover:bg-gold-300 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+        className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold-400 px-6 py-3.5 text-sm font-semibold text-brand-950 shadow-lg shadow-gold-400/30 transition-transform hover:scale-[1.01] hover:bg-gold-300 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
       >
         {status === "sending" ? "Sending..." : "Send Enquiry"}
+        {status !== "sending" && (
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M4 10h12M11 5l5 5-5 5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        )}
       </button>
     </form>
   );
