@@ -23,19 +23,20 @@ export default function Hero() {
       <div className="section-shell relative z-10 grid grid-cols-1 gap-8 py-10 sm:py-12 lg:grid-cols-2 lg:items-center lg:gap-8 lg:py-14">
         <div className="max-w-xl">
           <span className="inline-flex items-center gap-2 rounded-full border border-gold-300/40 bg-gold-400/10 px-3.5 py-1 text-[11px] font-semibold tracking-wide text-gold-200 uppercase">
-            Best Kashmir Tour Packages 2026
+            🪔 Diwali Special Offer — Book Now
           </span>
 
           <h1 className="mt-4 font-display text-4xl leading-[1.02] font-extrabold tracking-tight text-white uppercase sm:text-5xl">
-            Kashmir Tour
-            <span className="block text-gold-400">Packages</span>
+            Diwali Sale on
+            <span className="block text-gold-400">Kashmir Packages</span>
           </h1>
 
           <p className="mt-3.5 max-w-md text-sm leading-relaxed text-cream-100/80">
-            Book the best Kashmir tour packages &amp; Kashmir holiday packages
-            with Kashmir Prestige — affordable Jammu Kashmir tour packages for
-            family, couple &amp; group trips across Srinagar, Gulmarg, Pahalgam,
-            Sonamarg, Doodhpathri, Yusmarg &amp; Verinag.
+            This Diwali, celebrate with special festive season prices on the
+            best Kashmir tour packages &amp; Kashmir holiday packages from
+            Kashmir Prestige — for family, couple &amp; group trips across
+            Srinagar, Gulmarg, Pahalgam, Sonamarg, Doodhpathri, Yusmarg &amp;
+            Verinag. Limited period Diwali offer.
           </p>
 
           <div className="mt-3.5 flex flex-wrap gap-1.5">
@@ -54,7 +55,7 @@ export default function Hero() {
               href="#packages"
               className="inline-flex items-center justify-center rounded-full bg-gold-400 px-7 py-3 text-sm font-bold tracking-wide text-brand-950 uppercase shadow-lg shadow-gold-400/30 transition-transform hover:scale-[1.02] hover:bg-gold-300"
             >
-              View Packages
+              Grab Diwali Offer
             </a>
             <a
               href={business.whatsapp}
@@ -97,7 +98,7 @@ export default function Hero() {
           <span className="absolute top-5 right-5 hidden h-12 w-12 rounded-full border-2 border-gold-300/50 lg:block" />
 
           <div className="absolute bottom-4 left-4 max-w-[190px] rounded-2xl bg-brand-950/70 px-3.5 py-2.5 text-[11px] leading-snug text-cream-50/90 backdrop-blur">
-            Best Kashmir tour packages — 3N/4D to 7N/8D, houseboat stay included.
+            🪔 Diwali offer live — 3N/4D to 7N/8D packages, houseboat stay included.
           </div>
         </div>
       </div>
