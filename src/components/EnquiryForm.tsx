@@ -7,13 +7,14 @@ import { useEnquiryModal } from "@/components/EnquiryModalContext";
 
 type EnquiryFormProps = {
   initialPackage?: string | null;
+  compact?: boolean;
 };
 
 function packageOptionValue(p: (typeof packages)[number]) {
   return `${p.name} (${p.duration})`;
 }
 
-export default function EnquiryForm({ initialPackage }: EnquiryFormProps) {
+export default function EnquiryForm({ initialPackage, compact = false }: EnquiryFormProps) {
   const router = useRouter();
   const { closeModal } = useEnquiryModal();
   const [name, setName] = useState("");
@@ -63,8 +64,13 @@ export default function EnquiryForm({ initialPackage }: EnquiryFormProps) {
     }
   }
 
+  const fieldClass =
+    "w-full rounded-xl border border-brand-900/15 bg-white text-sm text-brand-950 outline-none focus:border-brand-600 focus:ring-2 focus:ring-brand-600/20 " +
+    (compact ? "px-3.5 py-2" : "px-4 py-2.5");
+  const labelClass = `mb-1.5 block font-medium text-brand-900 ${compact ? "text-xs" : "text-sm"}`;
+
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className={compact ? "space-y-3" : "space-y-4"}>
       <input
         type="text"
         value={honey}
@@ -75,9 +81,9 @@ export default function EnquiryForm({ initialPackage }: EnquiryFormProps) {
         aria-hidden="true"
       />
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div className={`grid grid-cols-1 gap-3 sm:grid-cols-2 ${compact ? "" : "sm:gap-4"}`}>
         <div>
-          <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-brand-900">
+          <label htmlFor="name" className={labelClass}>
             Full Name
           </label>
           <input
@@ -86,11 +92,11 @@ export default function EnquiryForm({ initialPackage }: EnquiryFormProps) {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Your name"
-            className="w-full rounded-xl border border-brand-900/15 bg-white px-4 py-2.5 text-sm text-brand-950 outline-none focus:border-brand-600 focus:ring-2 focus:ring-brand-600/20"
+            className={fieldClass}
           />
         </div>
         <div>
-          <label htmlFor="phone" className="mb-1.5 block text-sm font-medium text-brand-900">
+          <label htmlFor="phone" className={labelClass}>
             Phone Number
           </label>
           <input
@@ -100,21 +106,21 @@ export default function EnquiryForm({ initialPackage }: EnquiryFormProps) {
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             placeholder="+91 98765 43210"
-            className="w-full rounded-xl border border-brand-900/15 bg-white px-4 py-2.5 text-sm text-brand-950 outline-none focus:border-brand-600 focus:ring-2 focus:ring-brand-600/20"
+            className={fieldClass}
           />
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div className={`grid grid-cols-1 gap-3 sm:grid-cols-2 ${compact ? "" : "sm:gap-4"}`}>
         <div>
-          <label htmlFor="package" className="mb-1.5 block text-sm font-medium text-brand-900">
+          <label htmlFor="package" className={labelClass}>
             Interested Package
           </label>
           <select
             id="package"
             value={pkg}
             onChange={(e) => setPkg(e.target.value)}
-            className="w-full rounded-xl border border-brand-900/15 bg-white px-4 py-2.5 text-sm text-brand-950 outline-none focus:border-brand-600 focus:ring-2 focus:ring-brand-600/20"
+            className={fieldClass}
           >
             {packages.map((p) => (
               <option key={p.slug} value={packageOptionValue(p)}>
@@ -124,7 +130,7 @@ export default function EnquiryForm({ initialPackage }: EnquiryFormProps) {
           </select>
         </div>
         <div>
-          <label htmlFor="date" className="mb-1.5 block text-sm font-medium text-brand-900">
+          <label htmlFor="date" className={labelClass}>
             Preferred Travel Date
           </label>
           <input
@@ -132,24 +138,26 @@ export default function EnquiryForm({ initialPackage }: EnquiryFormProps) {
             type="date"
             value={travelDate}
             onChange={(e) => setTravelDate(e.target.value)}
-            className="w-full rounded-xl border border-brand-900/15 bg-white px-4 py-2.5 text-sm text-brand-950 outline-none focus:border-brand-600 focus:ring-2 focus:ring-brand-600/20"
+            className={fieldClass}
           />
         </div>
       </div>
 
-      <div>
-        <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-brand-900">
-          Message (optional)
-        </label>
-        <textarea
-          id="message"
-          rows={3}
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          placeholder="Number of travellers, budget, special requests..."
-          className="w-full rounded-xl border border-brand-900/15 bg-white px-4 py-2.5 text-sm text-brand-950 outline-none focus:border-brand-600 focus:ring-2 focus:ring-brand-600/20"
-        />
-      </div>
+      {!compact && (
+        <div>
+          <label htmlFor="message" className={labelClass}>
+            Message (optional)
+          </label>
+          <textarea
+            id="message"
+            rows={3}
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="Number of travellers, budget, special requests..."
+            className={fieldClass}
+          />
+        </div>
+      )}
 
       {status === "error" && (
         <p className="text-sm font-medium text-red-600">{errorMessage}</p>
@@ -158,7 +166,9 @@ export default function EnquiryForm({ initialPackage }: EnquiryFormProps) {
       <button
         type="submit"
         disabled={status === "sending"}
-        className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold-400 px-6 py-3.5 text-sm font-semibold text-brand-950 shadow-lg shadow-gold-400/30 transition-transform hover:scale-[1.01] hover:bg-gold-300 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+        className={`inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold-400 font-semibold text-brand-950 shadow-lg shadow-gold-400/30 transition-transform hover:scale-[1.01] hover:bg-gold-300 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto ${
+          compact ? "px-5 py-2.5 text-sm" : "px-6 py-3.5 text-sm"
+        }`}
       >
         {status === "sending" ? "Sending..." : "Send Enquiry"}
         {status !== "sending" && (
