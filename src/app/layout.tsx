@@ -6,7 +6,9 @@ import Footer from "@/components/Footer";
 import FloatingButtons from "@/components/FloatingButtons";
 import { EnquiryModalProvider } from "@/components/EnquiryModalContext";
 import EnquiryModal from "@/components/EnquiryModal";
-import { business } from "@/lib/data";
+import { getSiteContent } from "@/lib/content";
+
+export const dynamic = "force-dynamic";
 
 const sans = Plus_Jakarta_Sans({
   variable: "--font-sans",
@@ -22,92 +24,91 @@ const display = Fraunces({
 
 const siteUrl = "https://www.kashmirprestige.com";
 
-export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
-  title: {
-    default:
-      "Kashmir Prestige | Best Kashmir Tour Packages from Srinagar, Jammu & Sopore",
-    template: "%s | Kashmir Prestige",
-  },
-  description:
-    "Book the best Kashmir tour packages with Kashmir Prestige, Sopore — 3N/4D to 7N/8D trips covering Srinagar, Gulmarg, Pahalgam, Sonamarg, Doodhpathri, Yusmarg & Verinag. Houseboat stay, unlimited buffet, premium transport & 24x7 support included.",
-  keywords: [
-    "kashmir tour packages",
-    "kashmir trip",
-    "kashmir holidays",
-    "kashmir package",
-    "kashmir trip package",
-    "srinagar tour packages",
-    "jammu kashmir tour package",
-    "cheapest tour packages for kashmir",
-    "kashmir travel packages",
-    "kashmir tour packages for family",
-    "kashmir tour packages for couple",
-    "gulmarg tour packages",
-    "best kashmir tour packages",
-    "kashmir group tour packages",
-    "kashmir honeymoon package",
-  ],
-  authors: [{ name: business.owner }],
-  creator: business.name,
-  openGraph: {
-    type: "website",
-    locale: "en_IN",
-    url: siteUrl,
-    siteName: business.name,
-    title: "Kashmir Prestige | Best Kashmir Tour Packages",
+export async function generateMetadata(): Promise<Metadata> {
+  const { business } = await getSiteContent();
+
+  return {
+    metadataBase: new URL(siteUrl),
+    title: {
+      default:
+        "Kashmir Prestige | Best Kashmir Tour Packages from Srinagar, Jammu & Sopore",
+      template: "%s | Kashmir Prestige",
+    },
     description:
-      "3N/4D to 7N/8D Kashmir tour packages covering Srinagar, Gulmarg, Pahalgam, Sonamarg, Doodhpathri, Yusmarg & Verinag. Houseboat stay, unlimited buffet & premium transport included.",
-    images: [
-      {
-        url: "/logo.jpeg",
-        width: 800,
-        height: 800,
-        alt: business.name,
-      },
+      "Book the best Kashmir tour packages with Kashmir Prestige, Sopore — 3N/4D to 7N/8D trips covering Srinagar, Gulmarg, Pahalgam, Sonamarg, Doodhpathri, Yusmarg & Verinag. Houseboat stay, unlimited buffet, premium transport & 24x7 support included.",
+    keywords: [
+      "kashmir tour packages",
+      "kashmir trip",
+      "kashmir holidays",
+      "kashmir package",
+      "kashmir trip package",
+      "srinagar tour packages",
+      "jammu kashmir tour package",
+      "cheapest tour packages for kashmir",
+      "kashmir travel packages",
+      "kashmir tour packages for family",
+      "kashmir tour packages for couple",
+      "gulmarg tour packages",
+      "best kashmir tour packages",
+      "kashmir group tour packages",
+      "kashmir honeymoon package",
     ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Kashmir Prestige | Best Kashmir Tour Packages",
-    description:
-      "3N/4D to 7N/8D Kashmir tour packages covering Srinagar, Gulmarg, Pahalgam, Sonamarg, Doodhpathri, Yusmarg & Verinag.",
-    images: ["/logo.jpeg"],
-  },
-  alternates: {
-    canonical: siteUrl,
-  },
-};
+    authors: [{ name: business.owner }],
+    creator: business.name,
+    openGraph: {
+      type: "website",
+      locale: "en_IN",
+      url: siteUrl,
+      siteName: business.name,
+      title: "Kashmir Prestige | Best Kashmir Tour Packages",
+      description:
+        "3N/4D to 7N/8D Kashmir tour packages covering Srinagar, Gulmarg, Pahalgam, Sonamarg, Doodhpathri, Yusmarg & Verinag. Houseboat stay, unlimited buffet & premium transport included.",
+      images: [
+        {
+          url: "/logo.jpeg",
+          width: 800,
+          height: 800,
+          alt: business.name,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Kashmir Prestige | Best Kashmir Tour Packages",
+      description:
+        "3N/4D to 7N/8D Kashmir tour packages covering Srinagar, Gulmarg, Pahalgam, Sonamarg, Doodhpathri, Yusmarg & Verinag.",
+      images: ["/logo.jpeg"],
+    },
+    alternates: {
+      canonical: siteUrl,
+    },
+  };
+}
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "TravelAgency",
-  name: business.name,
-  image: `${siteUrl}/logo.jpeg`,
-  url: siteUrl,
-  telephone: `+91${business.phone}`,
-  priceRange: "₹₹",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Bus Stand, Near Jewel Bakery",
-    addressLocality: "Sopore",
-    addressRegion: "Jammu and Kashmir",
-    postalCode: "193201",
-    addressCountry: "IN",
-  },
-  areaServed: [
-    "Srinagar",
-    "Gulmarg",
-    "Pahalgam",
-    "Sonamarg",
-    "Doodhpathri",
-    "Yusmarg",
-    "Verinag",
-  ],
-  sameAs: [],
-};
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const content = await getSiteContent();
+  const { business } = content;
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "TravelAgency",
+    name: business.name,
+    image: `${siteUrl}/logo.jpeg`,
+    url: siteUrl,
+    telephone: `+91${business.phone}`,
+    priceRange: "₹₹",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Bus Stand, Near Jewel Bakery",
+      addressLocality: "Sopore",
+      addressRegion: "Jammu and Kashmir",
+      postalCode: "193201",
+      addressCountry: "IN",
+    },
+    areaServed: content.destinations.map((d) => d.name),
+    sameAs: [],
+  };
+
   return (
     <html
       lang="en"
@@ -120,11 +121,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <EnquiryModalProvider>
-          <Header />
+          <Header business={business} />
           <main className="flex-1">{children}</main>
-          <Footer />
-          <FloatingButtons />
-          <EnquiryModal />
+          <Footer business={business} destinations={content.destinations} packages={content.packages} />
+          <FloatingButtons business={business} />
+          <EnquiryModal packages={content.packages} />
         </EnquiryModalProvider>
       </body>
     </html>

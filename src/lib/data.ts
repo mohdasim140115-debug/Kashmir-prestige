@@ -1,9 +1,9 @@
 export const business = {
   name: "Kashmir Prestige",
   owner: "Muneeb Basir",
-  phone: "9682627782",
-  phoneDisplay: "+91 96826 27782",
-  whatsapp: "https://wa.me/919682627782",
+  phone: "6006231508",
+  phoneDisplay: "+91 60062 31508",
+  whatsapp: "https://wa.me/916006231508",
   email: "enquiry.kashmirprestige@gmail.com",
   address: "Bus Stand, Near Jewel Bakery, Sopore, Jammu & Kashmir 193201",
   addressShort: "Sopore, Jammu & Kashmir",
@@ -135,9 +135,8 @@ export const packages: TourPackage[] = [
     days: 5,
     badge: "Trending",
     places: ["Srinagar", "Gulmarg", "Pahalgam"],
-    highlights: ["Candlelight dinner on houseboat", "Private Shikara ride", "Premium couple rooms"],
-    image:
-      "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?w=1200&q=80&auto=format&fit=crop",
+    highlights: ["Stay at Kolahoi Green, Gulmarg", "Private Shikara ride", "Premium couple rooms"],
+    image: "/7d4020a9-7de7-46e9-8a07-3c2bdb938360.webp",
     price: 29999,
   },
   {

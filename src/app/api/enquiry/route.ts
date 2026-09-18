@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-import { business } from "@/lib/data";
+import { getSiteContent } from "@/lib/content";
 
 export async function POST(request: Request) {
+  const { business } = await getSiteContent();
   const apiKey = process.env.RESEND_API_KEY;
 
   if (!apiKey) {
@@ -14,7 +15,7 @@ export async function POST(request: Request) {
   }
 
   const body = await request.json();
-  const { name, phone, packageName, travelDate, message, honey } = body;
+  const { name, phone, packageName, travelDate, travellers, message, honey } = body;
 
   // honeypot field: real users never fill this
   if (honey) {
@@ -57,6 +58,7 @@ export async function POST(request: Request) {
           ${row("Phone", escapeHtml(phone))}
           ${row("Interested Package", escapeHtml(packageName ?? ""))}
           ${row("Preferred Travel Date", escapeHtml(travelDate ?? ""))}
+          ${row("No. of Travellers", escapeHtml(travellers ?? ""))}
           ${row("Message", escapeHtml(message ?? ""))}
         </table>
 

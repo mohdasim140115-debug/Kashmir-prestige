@@ -1,39 +1,7 @@
 import Image from "next/image";
+import type { GalleryPhoto } from "@/lib/content";
 
-const photos = [
-  {
-    src: "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?w=1000&q=80&auto=format&fit=crop",
-    alt: "Houseboats on Dal Lake, Srinagar",
-    tall: true,
-  },
-  {
-    src: "https://images.unsplash.com/photo-1715457573748-8e8a70b2c1be?w=800&q=80&auto=format&fit=crop",
-    alt: "Shikara boats on Dal Lake, Srinagar",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1552098933-a5ceb0e5dd91?w=800&q=80&auto=format&fit=crop",
-    alt: "Snow-capped mountains in Gulmarg",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1643449416258-5c8e7ec598b1?w=1000&q=80&auto=format&fit=crop",
-    alt: "Betaab Valley, Pahalgam",
-    tall: true,
-  },
-  {
-    src: "https://images.unsplash.com/photo-1627894485200-b92fb4353967?w=800&q=80&auto=format&fit=crop",
-    alt: "Green meadow with snow peaks, Doodhpathri",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1621232082074-1a7750ecc557?w=800&q=80&auto=format&fit=crop",
-    alt: "Pine forest and snow valley, Sonamarg",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1598091383021-15ddea10925d?w=800&q=80&auto=format&fit=crop",
-    alt: "Horse grazing in Yusmarg meadow",
-  },
-];
-
-export default function Gallery() {
+export default function Gallery({ photos }: { photos: GalleryPhoto[] }) {
   return (
     <section id="gallery" className="bg-cream-100 py-20 sm:py-28">
       <div className="section-shell">

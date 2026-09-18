@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { business } from "@/lib/data";
+import { getSiteContent } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Thank You",
@@ -8,7 +8,9 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default function ThankYouPage() {
+export default async function ThankYouPage() {
+  const { business } = await getSiteContent();
+
   return (
     <section className="flex min-h-[70vh] items-center bg-cream-100 py-20">
       <div className="section-shell">

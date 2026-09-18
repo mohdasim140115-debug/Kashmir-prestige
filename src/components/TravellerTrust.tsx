@@ -1,41 +1,9 @@
 "use client";
 
 import { useRef } from "react";
+import type { PromiseItem } from "@/lib/content";
 
-const promises = [
-  {
-    title: "Locally Planned, Not Outsourced",
-    detail:
-      "Every itinerary is built by our own team based in Sopore, using roads, hotels and weather we actually know — not read off a script by a call centre in another city.",
-  },
-  {
-    title: "Transparent Pricing, Always",
-    detail:
-      "Toll, parking and GST are already folded into your quote before you ever ask. What we tell you on the call is exactly what you pay at checkout — no surprise add-ons.",
-  },
-  {
-    title: "Support That Doesn't Disappear",
-    detail:
-      "Our number stays reachable before you book, all through your trip and even after you're back home — 24x7, not just during office hours.",
-  },
-  {
-    title: "Every Trip, Fully Customised",
-    detail:
-      "Family holiday, group tour, couple getaway or a solo escape — your itinerary is built around your pace and budget, not squeezed into a fixed template.",
-  },
-  {
-    title: "Comfort From the First Pickup",
-    detail:
-      "Land in Srinagar, Jammu, Katra or Udhampur and we're already handling the transfer, hotel check-in and the small logistics so your trip feels effortless from minute one.",
-  },
-  {
-    title: "A Team That Knows the Valley",
-    detail:
-      "Kashmir's weather and roads change fast between seasons. Being based right here means your route is planned around real conditions, not guesswork from a spreadsheet.",
-  },
-];
-
-export default function TravellerTrust() {
+export default function TravellerTrust({ promises }: { promises: PromiseItem[] }) {
   const trackRef = useRef<HTMLDivElement>(null);
 
   function scrollByAmount(direction: 1 | -1) {

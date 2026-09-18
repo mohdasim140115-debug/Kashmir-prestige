@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { business } from "@/lib/data";
+import type { Business } from "@/lib/content";
 
 const navLinks = [
   { href: "#packages", label: "Packages" },
@@ -14,7 +14,7 @@ const navLinks = [
   { href: "#enquiry", label: "Contact" },
 ];
 
-export default function Header() {
+export default function Header({ business }: { business: Business }) {
   const [open, setOpen] = useState(false);
 
   return (

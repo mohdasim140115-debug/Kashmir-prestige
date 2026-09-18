@@ -1,8 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
-import { business, destinations, packages } from "@/lib/data";
+import type { Business, Destination, TourPackage } from "@/lib/content";
 
-export default function Footer() {
+export default function Footer({
+  business,
+  destinations,
+  packages,
+}: {
+  business: Business;
+  destinations: Destination[];
+  packages: TourPackage[];
+}) {
   return (
     <footer className="bg-brand-900 pt-16 text-cream-100">
       <div className="section-shell grid grid-cols-1 gap-10 pb-12 sm:grid-cols-2 lg:grid-cols-4">

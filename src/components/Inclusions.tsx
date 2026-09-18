@@ -1,4 +1,8 @@
-import { inclusions } from "@/lib/data";
+import type { Inclusion } from "@/lib/content";
+
+const defaultIcon = (
+  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" strokeLinecap="round" strokeLinejoin="round" />
+);
 
 const icons: Record<string, React.ReactNode> = {
   "Breakfast & Dinner": (
@@ -27,7 +31,7 @@ const icons: Record<string, React.ReactNode> = {
   ),
 };
 
-export default function Inclusions() {
+export default function Inclusions({ inclusions }: { inclusions: Inclusion[] }) {
   return (
     <section id="inclusions" className="bg-cream-50 py-20 sm:py-28">
       <div className="section-shell">
@@ -52,7 +56,7 @@ export default function Inclusions() {
             >
               <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-50 text-brand-700">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
-                  {icons[item.title]}
+                  {icons[item.title] ?? defaultIcon}
                 </svg>
               </div>
               <h3 className="mt-4 font-display text-base font-semibold text-brand-900">

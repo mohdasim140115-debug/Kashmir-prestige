@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { destinations } from "@/lib/data";
+import type { Destination } from "@/lib/content";
 
-export default function Destinations() {
+export default function Destinations({ destinations }: { destinations: Destination[] }) {
   return (
     <section id="destinations" className="bg-brand-950 py-20 text-cream-50 sm:py-28">
       <div className="section-shell">

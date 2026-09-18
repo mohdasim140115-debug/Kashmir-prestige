@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { testimonials } from "@/lib/data";
+import type { Testimonial } from "@/lib/content";
 
 function initials(name: string) {
   return name
@@ -32,7 +32,7 @@ function Stars({ rating }: { rating: number }) {
   );
 }
 
-export default function Testimonials() {
+export default function Testimonials({ testimonials }: { testimonials: Testimonial[] }) {
   const [start, setStart] = useState(0);
   const perPage = 3;
 

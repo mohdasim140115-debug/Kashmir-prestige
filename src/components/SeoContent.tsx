@@ -1,10 +1,10 @@
-import { business } from "@/lib/data";
+import type { Business } from "@/lib/content";
 
 function Kw({ children }: { children: React.ReactNode }) {
   return <strong className="font-semibold text-brand-800">{children}</strong>;
 }
 
-export default function SeoContent() {
+export default function SeoContent({ business }: { business: Business }) {
   return (
     <section className="bg-cream-100 py-16 sm:py-20">
       <div className="section-shell">

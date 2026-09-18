@@ -1,7 +1,13 @@
 import EnquiryForm from "@/components/EnquiryForm";
-import { business } from "@/lib/data";
+import type { Business, TourPackage } from "@/lib/content";
 
-export default function EnquirySection() {
+export default function EnquirySection({
+  business,
+  packages,
+}: {
+  business: Business;
+  packages: TourPackage[];
+}) {
   return (
     <section id="enquiry" className="bg-brand-950 py-20 text-cream-50 sm:py-28">
       <div className="section-shell grid grid-cols-1 gap-12 lg:grid-cols-5">
@@ -58,7 +64,7 @@ export default function EnquirySection() {
         </div>
 
         <div className="rounded-3xl bg-cream-50 p-6 shadow-2xl sm:p-8 lg:col-span-3">
-          <EnquiryForm />
+          <EnquiryForm packages={packages} />
         </div>
       </div>
     </section>

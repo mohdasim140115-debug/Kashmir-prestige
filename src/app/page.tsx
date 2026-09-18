@@ -9,21 +9,24 @@ import EnquirySection from "@/components/EnquirySection";
 import SeoContent from "@/components/SeoContent";
 import TravellerTrust from "@/components/TravellerTrust";
 import Testimonials from "@/components/Testimonials";
+import { getSiteContent } from "@/lib/content";
 
-export default function Home() {
+export default async function Home() {
+  const content = await getSiteContent();
+
   return (
     <>
-      <Hero />
+      <Hero hero={content.hero} packages={content.packages} />
       <TrustBar />
-      <Packages />
-      <Destinations />
-      <Gallery />
-      <Inclusions />
-      <WhyChooseUs />
-      <EnquirySection />
-      <SeoContent />
-      <TravellerTrust />
-      <Testimonials />
+      <Packages packages={content.packages} business={content.business} />
+      <Destinations destinations={content.destinations} />
+      <Gallery photos={content.gallery} />
+      <Inclusions inclusions={content.inclusions} />
+      <WhyChooseUs pickupPoints={content.pickupPoints} services={content.services} />
+      <EnquirySection business={content.business} packages={content.packages} />
+      <SeoContent business={content.business} />
+      <TravellerTrust promises={content.promises} />
+      <Testimonials testimonials={content.testimonials} />
     </>
   );
 }

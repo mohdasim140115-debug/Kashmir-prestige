@@ -1,7 +1,8 @@
 import Image from "next/image";
 import EnquiryForm from "@/components/EnquiryForm";
+import type { HeroContent, TourPackage } from "@/lib/content";
 
-export default function Hero() {
+export default function Hero({ hero, packages }: { hero: HeroContent; packages: TourPackage[] }) {
   return (
     <section className="bg-brand-900">
       <div className="relative w-full overflow-hidden bg-brand-950 sm:rounded-b-[2rem]">
@@ -19,19 +20,28 @@ export default function Hero() {
         <div className="section-shell relative z-10 grid grid-cols-1 gap-6 py-6 sm:gap-8 sm:py-9 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:py-11">
           <div className="text-cream-50">
             <p className="text-xs font-semibold tracking-[0.2em] text-gold-300 uppercase">
-              Heaven on Earth Awaits
+              {hero.kicker}
             </p>
 
             <h1 className="mt-1.5 font-display text-3xl leading-[1.05] font-extrabold tracking-tight text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.45)] sm:mt-2 sm:text-5xl lg:text-[3.1rem]">
-              Discover Your
-              <span className="block text-gold-400">Dream Kashmir</span>
+              {hero.headingLine1}
+              <span className="block text-gold-400">{hero.headingLine2}</span>
             </h1>
 
             <p className="mt-2.5 max-w-md text-sm leading-relaxed text-cream-50 drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)] sm:mt-3.5 sm:text-base sm:text-cream-100/85 sm:drop-shadow-none">
-              This Diwali, explore the breathtaking beauty of Kashmir with
-              specially curated tour packages from Kashmir Prestige. Perfect
-              for families, couples and groups.
+              {hero.paragraph}
             </p>
+
+            <div className="mt-3 flex flex-wrap gap-1.5">
+              {hero.keywords.map((kw) => (
+                <span
+                  key={kw}
+                  className="rounded-full border border-white/25 bg-brand-950/50 px-3 py-1 text-[11px] font-semibold text-white backdrop-blur-sm"
+                >
+                  {kw}
+                </span>
+              ))}
+            </div>
 
             <div className="mt-4 flex flex-nowrap items-center gap-2 sm:mt-6 sm:gap-3">
               <a
@@ -58,13 +68,13 @@ export default function Hero() {
 
             <div className="mt-9 hidden items-center gap-3 sm:flex">
               <span className="font-display text-lg text-gold-200 italic">
-                &ldquo;Have a trip, it&apos;s a memory for life.&rdquo;
+                &ldquo;{hero.tagline}&rdquo;
               </span>
               <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-[11px] font-medium text-cream-100/90 backdrop-blur">
                 <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor">
                   <path d="M10 2a6 6 0 00-6 6c0 4.5 6 10 6 10s6-5.5 6-10a6 6 0 00-6-6zm0 8a2 2 0 100-4 2 2 0 000 4z" />
                 </svg>
-                Kashmir Valley
+                {hero.locationTag}
               </span>
             </div>
           </div>
@@ -81,7 +91,7 @@ export default function Hero() {
               best pricing.
             </p>
             <div className="mt-3 sm:mt-4">
-              <EnquiryForm compact />
+              <EnquiryForm packages={packages} compact />
             </div>
           </div>
         </div>

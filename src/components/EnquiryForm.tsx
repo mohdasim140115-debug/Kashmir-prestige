@@ -2,19 +2,20 @@
 
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import { packages } from "@/lib/data";
+import type { TourPackage } from "@/lib/content";
 import { useEnquiryModal } from "@/components/EnquiryModalContext";
 
 type EnquiryFormProps = {
   initialPackage?: string | null;
+  packages: TourPackage[];
   compact?: boolean;
 };
 
-function packageOptionValue(p: (typeof packages)[number]) {
+function packageOptionValue(p: TourPackage) {
   return `${p.name} (${p.duration})`;
 }
 
-export default function EnquiryForm({ initialPackage, compact = false }: EnquiryFormProps) {
+export default function EnquiryForm({ initialPackage, packages, compact = false }: EnquiryFormProps) {
   const router = useRouter();
   const { closeModal } = useEnquiryModal();
   const [name, setName] = useState("");
@@ -24,6 +25,7 @@ export default function EnquiryForm({ initialPackage, compact = false }: Enquiry
     return packageOptionValue(matched ?? packages[0]);
   });
   const [travelDate, setTravelDate] = useState("");
+  const [travellers, setTravellers] = useState("2");
   const [message, setMessage] = useState("");
   const [honey, setHoney] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "error">("idle");
@@ -43,6 +45,7 @@ export default function EnquiryForm({ initialPackage, compact = false }: Enquiry
           phone,
           packageName: pkg,
           travelDate,
+          travellers,
           message,
           honey,
         }),
@@ -111,33 +114,49 @@ export default function EnquiryForm({ initialPackage, compact = false }: Enquiry
         </div>
       </div>
 
-      <div className={`grid grid-cols-1 gap-3 sm:grid-cols-2 ${compact ? "" : "sm:gap-4"}`}>
-        <div>
-          <label htmlFor="package" className={labelClass}>
-            Interested Package
-          </label>
-          <select
-            id="package"
-            value={pkg}
-            onChange={(e) => setPkg(e.target.value)}
-            className={fieldClass}
-          >
-            {packages.map((p) => (
-              <option key={p.slug} value={packageOptionValue(p)}>
-                {p.name} ({p.duration})
-              </option>
-            ))}
-          </select>
-        </div>
+      <div>
+        <label htmlFor="package" className={labelClass}>
+          Interested Package
+        </label>
+        <select
+          id="package"
+          value={pkg}
+          onChange={(e) => setPkg(e.target.value)}
+          className={fieldClass}
+        >
+          {packages.map((p) => (
+            <option key={p.slug} value={packageOptionValue(p)}>
+              {p.name} ({p.duration})
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className={`grid grid-cols-2 gap-3 ${compact ? "" : "sm:gap-4"}`}>
         <div>
           <label htmlFor="date" className={labelClass}>
-            Preferred Travel Date
+            Travel Date
           </label>
           <input
             id="date"
             type="date"
             value={travelDate}
             onChange={(e) => setTravelDate(e.target.value)}
+            className={fieldClass}
+          />
+        </div>
+        <div>
+          <label htmlFor="travellers" className={labelClass}>
+            No. of Travellers
+          </label>
+          <input
+            id="travellers"
+            type="number"
+            min={1}
+            max={50}
+            value={travellers}
+            onChange={(e) => setTravellers(e.target.value)}
+            placeholder="2"
             className={fieldClass}
           />
         </div>
@@ -153,7 +172,7 @@ export default function EnquiryForm({ initialPackage, compact = false }: Enquiry
             rows={3}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            placeholder="Number of travellers, budget, special requests..."
+            placeholder="Budget, special requests, anything else we should know..."
             className={fieldClass}
           />
         </div>

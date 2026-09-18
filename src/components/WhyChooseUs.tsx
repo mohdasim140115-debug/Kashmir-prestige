@@ -1,5 +1,3 @@
-import { pickupPoints, services } from "@/lib/data";
-
 const reasons = [
   {
     title: "Locally Based in Kashmir",
@@ -19,7 +17,13 @@ const reasons = [
   },
 ];
 
-export default function WhyChooseUs() {
+export default function WhyChooseUs({
+  pickupPoints,
+  services,
+}: {
+  pickupPoints: string[];
+  services: string[];
+}) {
   return (
     <section id="why-us" className="bg-cream-100 py-20 sm:py-28">
       <div className="section-shell grid grid-cols-1 gap-14 lg:grid-cols-2">
