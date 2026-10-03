@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import type { TourPackage } from "@/lib/content";
 import { useEnquiryModal } from "@/components/EnquiryModalContext";
@@ -30,9 +30,13 @@ export default function EnquiryForm({ initialPackage, packages, compact = false 
   const [honey, setHoney] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const submittingRef = useRef(false);
+  const leadTrackedRef = useRef(false);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (submittingRef.current) return;
+    submittingRef.current = true;
     setStatus("sending");
     setErrorMessage("");
 
@@ -56,7 +60,15 @@ export default function EnquiryForm({ initialPackage, packages, compact = false 
       if (!res.ok) {
         setStatus("error");
         setErrorMessage(data.error ?? "Something went wrong. Please try again.");
+        submittingRef.current = false;
         return;
+      }
+
+      if (!honey && !leadTrackedRef.current) {
+        leadTrackedRef.current = true;
+        const w = window as unknown as { dataLayer?: Record<string, string>[] };
+        w.dataLayer = w.dataLayer || [];
+        w.dataLayer.push({ event: "generate_lead" });
       }
 
       closeModal();
@@ -64,6 +76,7 @@ export default function EnquiryForm({ initialPackage, packages, compact = false 
     } catch {
       setStatus("error");
       setErrorMessage("Network error. Please check your connection and try again.");
+      submittingRef.current = false;
     }
   }
 
